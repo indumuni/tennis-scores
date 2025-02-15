@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "lint": "npx eslint dist",
     "build": "npx tsc",
     "format": "npx prettier . --write",
     "test": "jest --watch"
