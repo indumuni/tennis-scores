@@ -17,22 +17,14 @@ class Match {
   score(): string {
     if (this.game.isAdvantage()) {
       let playerId = this.game.playerWinning()
-      let s
+      let playerName
       if (playerId) {
-        s = this.findPlayer(playerId)
+        playerName = this.findPlayer(playerId)
       }
 
-      return `${this.set.score()}, ${this.game.score()} ${s}`
+      return `${this.set.score()}, ${this.game.score()} ${playerName}`
     }
     return `${this.set.score()}, ${this.game.score()}`
-  }
-
-  player1() {
-    return this.findPlayer(PLAYER_1)
-  }
-
-  player2() {
-    return this.findPlayer(PLAYER_2)
   }
 
   private findPlayer(key: PLAYER) {
