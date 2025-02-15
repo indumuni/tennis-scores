@@ -44,7 +44,7 @@ class Game extends Scorable {
   }
 
   isCompleted() {
-    const { player1Score, player2Score } = this.playerScores()
+    const { player1Score, player2Score } = this.getPlayerScores()
 
     return (
       Math.abs(player1Score - player2Score) >= 2 &&
@@ -53,30 +53,28 @@ class Game extends Scorable {
   }
 
   isDeuce() {
-    const { player1Score, player2Score } = this.playerScores()
+    const { player1Score, player2Score } = this.getPlayerScores()
     return Math.abs(player1Score - player2Score) === 0 && player1Score == 3
   }
 
   isAdvantage() {
-    const { player1Score, player2Score } = this.playerScores()
+    const { player1Score, player2Score } = this.getPlayerScores()
     return (
       Math.abs(player1Score - player2Score) === 1 &&
       (player1Score > 3 || player2Score > 3)
     )
   }
 
-  playerWinning(): PLAYER | "" {
-    const { player1Score, player2Score } = this.playerScores()
+  playerWinning(): PLAYER | undefined {
+    const { player1Score, player2Score } = this.getPlayerScores()
     if (player1Score - player2Score > 0) {
       return PLAYER_1
     }
     if (player2Score - player1Score > 0) {
       return PLAYER_2
     }
-    return ""
+    return
   }
-
-
 }
 
 export default Game

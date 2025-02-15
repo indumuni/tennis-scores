@@ -6,7 +6,7 @@ class SetTiebreaker extends Scorable {
   }
 
   isCompleted(): boolean {
-    const { player1Score, player2Score } = this.playerScores()
+    const { player1Score, player2Score } = this.getPlayerScores()
 
     return (
       Math.abs(player1Score - player2Score) >= 2 &&

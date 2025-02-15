@@ -34,13 +34,6 @@ class Match {
     return `${this.set.score()}, ${this.game.score()}`
   }
 
-  private findPlayerName(playerId: PLAYER) {
-    const player = this.playersName.get(playerId)
-
-    if (player === undefined) throw new Error("Player not found")
-    return player
-  }
-
   pointWonBy(playerName: string) {
     const player: PLAYER = this.findPlayerByName(playerName)
     if (this.set.isTieBreaker()) {
@@ -56,6 +49,13 @@ class Match {
         this.set.pointWonBy(player)
       }
     }
+  }
+
+  private findPlayerName(playerId: PLAYER) {
+    const player = this.playersName.get(playerId)
+
+    if (player === undefined) throw new Error("Player not found")
+    return player
   }
 
   private findPlayerByName(playerName: string): PLAYER {

@@ -81,5 +81,4 @@ describe("Match pushed to a Tiebreaker ", () => {
     expect(set.isCompleted()).toEqual(true)
     expect(set.isTieBreaker()).toEqual(false)
   })
-
 })

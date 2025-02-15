@@ -6,7 +6,8 @@
     "lint": "npx eslint dist",
     "build": "npx tsc",
     "format": "npx prettier . --write",
-    "test": "jest --watch"
+    "test": "jest --verbose",
+    "test-watch": "jest --watch"
   },
   "keywords": [],
   "author": "",

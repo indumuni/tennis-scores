@@ -55,7 +55,7 @@ describe("After Three Equal wins", () => {
     expect(game.isDeuce()).toEqual(true)
     expect(game.isAdvantage()).toEqual(false)
     expect(game.isCompleted()).toEqual(false)
-    expect(game.playerWinning()).toEqual("")
+    expect(game.playerWinning()).toEqual(undefined)
   })
 
   test("after 40-40 winning one more", () => {

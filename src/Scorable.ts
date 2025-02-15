@@ -18,6 +18,21 @@ abstract class Scorable {
     this.setScore(player, ++score)
   }
 
+  public reset() {
+    this.setDefaultScore()
+  }
+
+  public playerWinning(): PLAYER | undefined {
+    const { player1Score, player2Score } = this.getPlayerScores()
+    if (player1Score - player2Score > 0) {
+      return PLAYER_1
+    }
+    if (player2Score - player1Score > 0) {
+      return PLAYER_2
+    }
+    return
+  }
+
   protected displayScore(player: PLAYER): string {
     return this.getScore(player) + ""
   }
@@ -30,29 +45,14 @@ abstract class Scorable {
     return score
   }
 
-  public setScore(player: PLAYER, score: number) {
+  protected setScore(player: PLAYER, score: number) {
     this.gamePoints.set(player, score)
   }
 
-  protected playerScores() {
+  protected getPlayerScores() {
     const player1Score = this.getScore(PLAYER_1)
     const player2Score = this.getScore(PLAYER_2)
     return { player1Score, player2Score }
-  }
-
-  public reset() {
-    this.setDefaultScore()
-  }
-
-  public playerWinning(): PLAYER | "" {
-    const { player1Score, player2Score } = this.playerScores()
-    if (player1Score - player2Score > 0) {
-      return PLAYER_1
-    }
-    if (player2Score - player1Score > 0) {
-      return PLAYER_2
-    }
-    return ""
   }
 
   private setDefaultScore() {

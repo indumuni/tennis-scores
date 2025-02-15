@@ -29,7 +29,7 @@ describe("Super tiebreaker win after 11 ", () => {
     }
     expect(tieBreaker.score()).toEqual("11-11")
     expect(tieBreaker.isCompleted()).toEqual(false)
-    expect(tieBreaker.playerWinning()).toEqual("")
+    expect(tieBreaker.playerWinning()).toEqual(undefined)
   })
 
   test("two consecutive wins decide the tiebreaker", () => {
