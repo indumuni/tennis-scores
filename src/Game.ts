@@ -1,11 +1,13 @@
 import { PLAYER, PLAYER_1, PLAYER_2, otherPlayer } from "./TennisCommons"
 
-type GAME_POINTS = "0" | "15" | "30" | "40" | ""
-
 class Game {
   private gamePoints: Map<PLAYER, number> = new Map()
 
   constructor() {
+    this.setDefaultScore()
+  }
+
+  private setDefaultScore() {
     this.gamePoints.set(PLAYER_1, 0)
     this.gamePoints.set(PLAYER_2, 0)
   }
@@ -14,7 +16,7 @@ class Game {
     return `${this.displayScore(PLAYER_1)}-${this.displayScore(PLAYER_2)}`
   }
 
-  private displayScore(key: PLAYER): GAME_POINTS {
+  protected displayScore(key: PLAYER): string {
     switch (this.gamePoints.get(key)) {
       case 0:
         return "0"
@@ -42,7 +44,7 @@ class Game {
 
   private getScore(player: PLAYER) {
     let score = this.gamePoints.get(player)
-    if (score == undefined) {
+    if (score === undefined) {
       // TODO: NOT tested
       throw new Error("Could not find any player")
     }
@@ -54,7 +56,7 @@ class Game {
     let player2Score = this.getScore(PLAYER_2)
 
     return (
-      Math.abs(player1Score - player2Score) == 2 &&
+      Math.abs(player1Score - player2Score) >= 2 &&
       (player1Score > 3 || player2Score > 3)
     )
   }
@@ -62,14 +64,14 @@ class Game {
   isDeuce() {
     let player1Score = this.getScore(PLAYER_1)
     let player2Score = this.getScore(PLAYER_2)
-    return Math.abs(player1Score - player2Score) == 0 && player1Score == 3
+    return Math.abs(player1Score - player2Score) === 0 && player1Score == 3
   }
 
   isAdvantage() {
     let player1Score = this.getScore(PLAYER_1)
     let player2Score = this.getScore(PLAYER_2)
     return (
-      Math.abs(player1Score - player2Score) == 1 &&
+      Math.abs(player1Score - player2Score) === 1 &&
       (player1Score > 3 || player2Score > 3)
     )
   }
@@ -84,6 +86,10 @@ class Game {
       return PLAYER_2
     }
     return ""
+  }
+
+  reset() {
+    this.setDefaultScore()
   }
 }
 

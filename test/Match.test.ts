@@ -20,24 +20,68 @@ describe("Match score suite", () => {
   })
 
   test("Should show initial score at the start", () => {
-    expect(match.score()).toEqual("0-0")
+    expect(match.score()).toEqual("0-0, 0-0")
   })
 
-  test("Should show score when Player1 won by first point", () => {
+  test("Should show score when Player1 won first point", () => {
     match.pointWonBy(match.player1())
     expect(match.score()).toEqual("0-0, 15-0")
   })
 
-  test("Should show score when Player1 won by second point", () => {
-    match.pointWonBy(match.player1())
+  test("Should show score when Player1 won second point", () => {
     match.pointWonBy(match.player1())
     expect(match.score()).toEqual("0-0, 30-0")
   })
 
-  test("Should show score when Player1 won by third point", () => {
-    match.pointWonBy(match.player1())
-    match.pointWonBy(match.player1())
+  test("Should show score when Player1 won third point", () => {
     match.pointWonBy(match.player1())
     expect(match.score()).toEqual("0-0, 40-0")
   })
+
+  test("should reflect game score ", () => {
+    match.pointWonBy(match.player1())
+    expect(match.score()).toEqual("1-0, 0-0")
+  })
+})
+
+
+describe("Game tiebreaker", () => {
+  let match: Match
+  beforeAll(() => {
+    match = new Match("Player 1", "Player 2")
+  })
+
+
+  test("Should show score when Player1 won first point", () => {
+
+    for (let i = 0; i < 3; i++) {
+      match.pointWonBy(match.player1())
+      match.pointWonBy(match.player2())
+    }
+
+    expect(match.score()).toEqual("0-0, 40-40")
+  })
+
+})
+
+describe("Match game tiebreaker", () => {
+  let match: Match
+  beforeAll(() => {
+    match = new Match("Player 1", "Player 2")
+  })
+
+
+  test("Should show score when Player1 won first point", () => {
+    for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 4; i++) {
+        match.pointWonBy(match.player1())
+      }
+      for (let i = 0; i < 4; i++) {
+        match.pointWonBy(match.player2())
+      }
+    }
+
+    expect(match.score()).toEqual("6-6, 0-0")
+  })
+
 })
