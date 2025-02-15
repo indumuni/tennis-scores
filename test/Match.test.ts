@@ -34,23 +34,55 @@ describe("Match score suite", () => {
   })
 })
 
-describe("Game tiebreaker", () => {
+describe("Game advantage", () => {
   let match: Match
   beforeAll(() => {
     match = new Match(PLAYER_1_NAME, PLAYER_2_NAME)
   })
 
-  test("after winning 3 point by both players", () => {
+  test("both players winning 3 games each", () => {
+    for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 4; i++) {
+        match.pointWonBy(PLAYER_1_NAME)
+      }
+      for (let i = 0; i < 4; i++) {
+        match.pointWonBy(PLAYER_2_NAME)
+      }
+    }
+
+    expect(match.score()).toEqual("3-3, 0-0")
+  })
+
+  test("Both players winging 3 point each", () => {
     for (let i = 0; i < 3; i++) {
       match.pointWonBy(PLAYER_1_NAME)
       match.pointWonBy(PLAYER_2_NAME)
     }
 
-    expect(match.score()).toEqual("0-0, Deuce")
+    expect(match.score()).toEqual("3-3, Deuce")
+  })
+
+  test("Player 2 take the advantage ", () => {
+    match.pointWonBy(PLAYER_2_NAME)
+
+    expect(match.score()).toEqual("3-3, Advantage Player 2")
+  })
+
+  test("Player 1 push back to deuce ", () => {
+    match.pointWonBy(PLAYER_1_NAME)
+
+    expect(match.score()).toEqual("3-3, Deuce")
+  })
+
+  test("Player 1 push 2 more point to take the game", () => {
+    match.pointWonBy(PLAYER_1_NAME)
+    match.pointWonBy(PLAYER_1_NAME)
+
+    expect(match.score()).toEqual("4-3, 0-0")
   })
 })
 
-describe("Match game tiebreaker", () => {
+describe("Match set tiebreaker", () => {
   let match: Match
   beforeAll(() => {
     match = new Match(PLAYER_1_NAME, PLAYER_2_NAME)
@@ -66,22 +98,22 @@ describe("Match game tiebreaker", () => {
       }
     }
 
-    expect(match.score()).toEqual("6-6, 0-0")
+    expect(match.score()).toEqual("6-6, Tiebreaker 0-0")
   })
 
   test("going close with game tie breaker", () => {
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 5; i++) {
       match.pointWonBy(PLAYER_1_NAME)
       match.pointWonBy(PLAYER_2_NAME)
     }
 
-    expect(match.score()).toEqual("6-6, Deuce")
+    expect(match.score()).toEqual("6-6, Tiebreaker 5-5")
   })
 
-  test("one point push to advantage", () => {
+  test("one point push to set point", () => {
     match.pointWonBy(PLAYER_2_NAME)
 
-    expect(match.score()).toEqual("6-6, Advantage Player 2")
+    expect(match.score()).toEqual("6-6, Tiebreaker 5-6")
   })
 
   test("another more point to win the set", () => {

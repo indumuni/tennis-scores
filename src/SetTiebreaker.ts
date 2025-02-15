@@ -1,6 +1,6 @@
 import Scorable from "./Scorable"
 
-class MatchTiebreaker extends Scorable {
+class SetTiebreaker extends Scorable {
   constructor() {
     super()
   }
@@ -15,4 +15,4 @@ class MatchTiebreaker extends Scorable {
   }
 }
 
-export default MatchTiebreaker
+export default SetTiebreaker

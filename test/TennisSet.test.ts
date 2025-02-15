@@ -34,7 +34,32 @@ describe("Straight set win", () => {
   })
 })
 
-describe("Super tiebreaker ", () => {
+describe("Just avoid tie breaker ", () => {
+  let set: TennisSet
+  beforeAll(() => {
+    set = new TennisSet()
+  })
+
+  test("after both winning 5 games", () => {
+    for (let i = 0; i < 5; i++) {
+      set.pointWonBy("1")
+      set.pointWonBy("2")
+    }
+    expect(set.score()).toEqual("5-5")
+    expect(set.isCompleted()).toEqual(false)
+    expect(set.isTieBreaker()).toEqual(false)
+  })
+
+  test("two consecutive games move player one for win", () => {
+    set.pointWonBy("1")
+    set.pointWonBy("1")
+    expect(set.score()).toEqual("7-5")
+    expect(set.isCompleted()).toEqual(true)
+    expect(set.isTieBreaker()).toEqual(false)
+  })
+})
+
+describe("Match pushed to a Tiebreaker ", () => {
   let set: TennisSet
   beforeAll(() => {
     set = new TennisSet()
@@ -47,5 +72,14 @@ describe("Super tiebreaker ", () => {
     }
     expect(set.score()).toEqual("6-6")
     expect(set.isCompleted()).toEqual(false)
+    expect(set.isTieBreaker()).toEqual(true)
   })
+
+  test("after tiebreaker need just one win to win the set", () => {
+    set.pointWonBy("2")
+    expect(set.score()).toEqual("6-7")
+    expect(set.isCompleted()).toEqual(true)
+    expect(set.isTieBreaker()).toEqual(false)
+  })
+
 })

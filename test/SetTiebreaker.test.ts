@@ -1,9 +1,9 @@
-import MatchTiebreaker from "../src/MatchTiebreaker"
+import SetTiebreaker from "../src/SetTiebreaker"
 
 describe("Super tiebreaker win", () => {
-  let tieBreaker: MatchTiebreaker
+  let tieBreaker: SetTiebreaker
   beforeAll(() => {
-    tieBreaker = new MatchTiebreaker()
+    tieBreaker = new SetTiebreaker()
   })
 
   test("after both winning 6 games", () => {
@@ -17,9 +17,9 @@ describe("Super tiebreaker win", () => {
 })
 
 describe("Super tiebreaker win after 11 ", () => {
-  let tieBreaker: MatchTiebreaker
+  let tieBreaker: SetTiebreaker
   beforeAll(() => {
-    tieBreaker = new MatchTiebreaker()
+    tieBreaker = new SetTiebreaker()
   })
 
   test("after both winning 11 games head to head, game still open", () => {
@@ -42,9 +42,9 @@ describe("Super tiebreaker win after 11 ", () => {
 })
 
 describe("Super tiebreaker ", () => {
-  let tieBreaker: MatchTiebreaker
+  let tieBreaker: SetTiebreaker
   beforeAll(() => {
-    tieBreaker = new MatchTiebreaker()
+    tieBreaker = new SetTiebreaker()
   })
 
   test("after both winning 6 games", () => {
