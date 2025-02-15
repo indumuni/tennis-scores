@@ -4,13 +4,13 @@ Tennis-scores implement a tennis scoring system for tennis match with single set
 
 ## Design details
 
-Match class is the entry to the application.
+The **Match** class serves as the entry point to the application.
 
-There are three main classes, Game, TennisSet (because Set is taken) and Tiebreaker to represent Tennis Game, Set, and Tiebreaker. All these classes extends from Scorable class.
+There are three main classes: **Game**, **TennisSet** (since "Set" is already taken), and **Tiebreaker**, which represent a Tennis Game, Set, and Tiebreaker, respectively. All of these classes extend from the **Scorable** class.
 
-Games contains rules deuce, advantage, completed. Tennis Set contains rules tiebreak, completed and Tiebreak contains rules completed.
+The **Game** class contains rules for deuce, advantage, and completed states. The **TennisSet** class includes rules for tiebreaks and completed states, while the **Tiebreaker** class manages its own completed state rules.
 
-Match class has instructions how to use these classes to navigate correct scoring behaviour.
+The **Match** class provides instructions on how to use these classes to navigate the correct scoring behavior.
 
 ### Note:
 
