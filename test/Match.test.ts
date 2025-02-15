@@ -25,4 +25,22 @@ describe("Match score suite", () => {
   test("Should show initial score at the start", () => {
     expect(match.score()).toEqual("0-0");
   });
+
+  test("Should show score when Player1 won by first point", () => {
+    match.pointWonBy(match.player1())
+    expect(match.score()).toEqual("0-0, 15-0");
+  });
+
+  test("Should show score when Player1 won by second point", () => {
+    match.pointWonBy(match.player1())
+    match.pointWonBy(match.player1())
+    expect(match.score()).toEqual("0-0, 30-0");
+  });
+
+  test("Should show score when Player1 won by third point", () => {
+    match.pointWonBy(match.player1())
+    match.pointWonBy(match.player1())
+    match.pointWonBy(match.player1())
+    expect(match.score()).toEqual("0-0, 40-0");
+  });
 });

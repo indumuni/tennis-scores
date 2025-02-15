@@ -1,6 +1,7 @@
 class Match {
-  private playerOne: string;
-  private playerTwo: string;
+  private readonly playerOne: string;
+  private readonly playerTwo: string;
+
   constructor(player1: string, player2: string) {
     this.playerOne = player1;
     this.playerTwo = player2;
@@ -17,6 +18,10 @@ class Match {
 
   player2() {
     return this.playerTwo;
+  }
+
+  pointWonBy(player: string) {
+
   }
 }
 
