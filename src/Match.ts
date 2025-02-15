@@ -16,7 +16,7 @@ class Match {
 
   score(): string {
     if (this.game.isAdvantage()) {
-      let playerId = this.game.playerWinning()
+      const playerId = this.game.playerWinning()
       let playerName
       if (playerId) {
         playerName = this.findPlayer(playerId)
@@ -28,14 +28,14 @@ class Match {
   }
 
   private findPlayer(key: PLAYER) {
-    let player = this.playersName.get(key)
+    const player = this.playersName.get(key)
 
     if (player === undefined) throw new Error("Player not found")
     return player
   }
 
   pointWonBy(player: string) {
-    let p: PLAYER = this.findPlayerByName(player)
+    const p: PLAYER = this.findPlayerByName(player)
     this.game.pointWonBy(p)
     if (this.game.isCompleted()) {
       this.game.reset()
@@ -44,7 +44,7 @@ class Match {
   }
 
   private findPlayerByName(player: string): PLAYER {
-    for (let [key, value] of this.playersName.entries()) {
+    for (const [key, value] of this.playersName.entries()) {
       if (player === value) {
         return key
       }

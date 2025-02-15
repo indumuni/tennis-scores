@@ -1,5 +1,4 @@
 import Scorable from "./Scorable"
-import { PLAYER_1, PLAYER_2 } from "./TennisCommons"
 
 class MatchTiebreaker extends Scorable {
   constructor() {
@@ -7,8 +6,7 @@ class MatchTiebreaker extends Scorable {
   }
 
   isCompleted(): boolean {
-    let player1Score = this.getScore(PLAYER_1)
-    let player2Score = this.getScore(PLAYER_2)
+    const { player1Score, player2Score } = this.playerScores()
 
     return (
       Math.abs(player1Score - player2Score) >= 2 &&

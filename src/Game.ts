@@ -34,7 +34,7 @@ class Game extends Scorable {
 
   pointWonBy(player: PLAYER) {
     let score = this.getScore(player)
-    let opponent = otherPlayer(player)
+    const opponent = otherPlayer(player)
     let otherPlayerScore = this.getScore(opponent)
     if (this.isAdvantage() && otherPlayerScore > score) {
       this.setScore(opponent, --otherPlayerScore)
@@ -44,8 +44,7 @@ class Game extends Scorable {
   }
 
   isCompleted() {
-    let player1Score = this.getScore(PLAYER_1)
-    let player2Score = this.getScore(PLAYER_2)
+    const { player1Score, player2Score } = this.playerScores()
 
     return (
       Math.abs(player1Score - player2Score) >= 2 &&
@@ -54,14 +53,12 @@ class Game extends Scorable {
   }
 
   isDeuce() {
-    let player1Score = this.getScore(PLAYER_1)
-    let player2Score = this.getScore(PLAYER_2)
+    const { player1Score, player2Score } = this.playerScores()
     return Math.abs(player1Score - player2Score) === 0 && player1Score == 3
   }
 
   isAdvantage() {
-    let player1Score = this.getScore(PLAYER_1)
-    let player2Score = this.getScore(PLAYER_2)
+    const { player1Score, player2Score } = this.playerScores()
     return (
       Math.abs(player1Score - player2Score) === 1 &&
       (player1Score > 3 || player2Score > 3)
@@ -69,8 +66,7 @@ class Game extends Scorable {
   }
 
   playerWinning(): PLAYER | "" {
-    let player1Score = this.getScore(PLAYER_1)
-    let player2Score = this.getScore(PLAYER_2)
+    const { player1Score, player2Score } = this.playerScores()
     if (player1Score - player2Score > 0) {
       return PLAYER_1
     }
@@ -79,6 +75,8 @@ class Game extends Scorable {
     }
     return ""
   }
+
+
 }
 
 export default Game
