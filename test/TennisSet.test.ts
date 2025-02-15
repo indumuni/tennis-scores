@@ -42,19 +42,10 @@ describe("Super tiebreaker ", () => {
   })
 
   test("after both winning 6 games", () => {
-    set.pointWonBy("1")
-    set.pointWonBy("1")
-    set.pointWonBy("1")
-    set.pointWonBy("1")
-    set.pointWonBy("1")
-    set.pointWonBy("1")
-
-    set.pointWonBy("2")
-    set.pointWonBy("2")
-    set.pointWonBy("2")
-    set.pointWonBy("2")
-    set.pointWonBy("2")
-    set.pointWonBy("2")
+    for (let i = 0; i < 6; i++) {
+      set.pointWonBy("1")
+      set.pointWonBy("2")
+    }
     expect(set.score()).toEqual("6-6")
     expect(set.isCompleted()).toEqual(false)
   })
