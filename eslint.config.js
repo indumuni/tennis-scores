@@ -7,4 +7,4 @@ module.exports = [
       "prefer-const": "error",
     },
   },
-];
+]
