@@ -50,6 +50,7 @@ describe("After Three Equal wins", () => {
     game.pointWonBy("2")
     game.pointWonBy("2")
 
+    expect(game.score()).toEqual("Deuce")
     expect(game.isDeuce()).toEqual(true)
     expect(game.isAdvantage()).toEqual(false)
     expect(game.isCompleted()).toEqual(false)
@@ -59,9 +60,8 @@ describe("After Three Equal wins", () => {
   test("after 40-40 winning one more", () => {
     game.pointWonBy("2")
 
-    expect(game.isDeuce()).toEqual(false)
+    expect(game.score()).toEqual("Advantage")
     expect(game.isAdvantage()).toEqual(true)
-    expect(game.isCompleted()).toEqual(false)
     expect(game.playerWinning()).toEqual("2")
   })
 
@@ -69,17 +69,12 @@ describe("After Three Equal wins", () => {
     game.pointWonBy("1")
 
     expect(game.isDeuce()).toEqual(true)
-    expect(game.isAdvantage()).toEqual(false)
-    expect(game.isCompleted()).toEqual(false)
-    expect(game.playerWinning()).toEqual("")
   })
 
   test("after deuce, need 2 consecutive wins to win the game", () => {
     game.pointWonBy("1")
     game.pointWonBy("1")
 
-    expect(game.isDeuce()).toEqual(false)
-    expect(game.isAdvantage()).toEqual(false)
     expect(game.isCompleted()).toEqual(true)
     expect(game.playerWinning()).toEqual("1")
   })

@@ -3,13 +3,11 @@ import Game from "./Game"
 import TennisSet from "./TennisSet"
 
 class Match {
-
   private readonly playersName: Map<PLAYER, string> = new Map()
   private game: Game
   private set: TennisSet
 
   constructor(player1: string, player2: string) {
-
     this.playersName.set(PLAYER_1, player1)
     this.playersName.set(PLAYER_2, player2)
     this.game = new Game()
@@ -17,6 +15,15 @@ class Match {
   }
 
   score(): string {
+    if (this.game.isAdvantage()) {
+      let playerId = this.game.playerWinning()
+      let s
+      if (playerId) {
+        s = this.findPlayer(playerId)
+      }
+
+      return `${this.set.score()}, ${this.game.score()} ${s}`
+    }
     return `${this.set.score()}, ${this.game.score()}`
   }
 

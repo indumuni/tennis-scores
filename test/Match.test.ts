@@ -44,24 +44,20 @@ describe("Match score suite", () => {
   })
 })
 
-
 describe("Game tiebreaker", () => {
   let match: Match
   beforeAll(() => {
     match = new Match("Player 1", "Player 2")
   })
 
-
   test("Should show score when Player1 won first point", () => {
-
     for (let i = 0; i < 3; i++) {
       match.pointWonBy(match.player1())
       match.pointWonBy(match.player2())
     }
 
-    expect(match.score()).toEqual("0-0, 40-40")
+    expect(match.score()).toEqual("0-0, Deuce")
   })
-
 })
 
 describe("Match game tiebreaker", () => {
@@ -69,7 +65,6 @@ describe("Match game tiebreaker", () => {
   beforeAll(() => {
     match = new Match("Player 1", "Player 2")
   })
-
 
   test("Should show score when Player1 won first point", () => {
     for (let i = 0; i < 6; i++) {
@@ -84,4 +79,24 @@ describe("Match game tiebreaker", () => {
     expect(match.score()).toEqual("6-6, 0-0")
   })
 
+  test("going close with game tie breaker", () => {
+    for (let i = 0; i < 4; i++) {
+      match.pointWonBy(match.player1())
+      match.pointWonBy(match.player2())
+    }
+
+    expect(match.score()).toEqual("6-6, Deuce")
+  })
+
+  test("one point push to advantage", () => {
+    match.pointWonBy(match.player2())
+
+    expect(match.score()).toEqual("6-6, Advantage Player 2")
+  })
+
+  test("another more point to win the set", () => {
+    match.pointWonBy(match.player2())
+
+    expect(match.score()).toEqual("6-7, 0-0")
+  })
 })

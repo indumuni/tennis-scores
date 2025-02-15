@@ -16,7 +16,6 @@ describe("Super tiebreaker win", () => {
   })
 })
 
-
 describe("Super tiebreaker win after 11 ", () => {
   let tieBreaker: MatchTiebreaker
   beforeAll(() => {
@@ -32,7 +31,6 @@ describe("Super tiebreaker win after 11 ", () => {
     expect(tieBreaker.isCompleted()).toEqual(false)
     expect(tieBreaker.playerWinning()).toEqual("")
   })
-
 
   test("two consecutive wins decide the tiebreaker", () => {
     tieBreaker.pointWonBy("2")
@@ -57,5 +55,4 @@ describe("Super tiebreaker ", () => {
     expect(tieBreaker.score()).toEqual("6-6")
     expect(tieBreaker.isCompleted()).toEqual(false)
   })
-
 })

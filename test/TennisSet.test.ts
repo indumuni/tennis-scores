@@ -32,7 +32,6 @@ describe("Straight set win", () => {
     expect(set.isCompleted()).toEqual(true)
     expect(set.playerWinning()).toEqual("1")
   })
-
 })
 
 describe("Super tiebreaker ", () => {
@@ -49,6 +48,4 @@ describe("Super tiebreaker ", () => {
     expect(set.score()).toEqual("6-6")
     expect(set.isCompleted()).toEqual(false)
   })
-
-
 })
