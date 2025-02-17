@@ -35,16 +35,16 @@ class TennisSet extends Scorable {
 
   pointWonBy(player: PLAYER) {
     if (this.isTieBreaker()) {
-      this.setTiebreaker.pointWonBy(player)
+      this.setTiebreaker.incScore(player)
       if (this.setTiebreaker.isCompleted()) {
         this.setTiebreaker.reset()
-        super.pointWonBy(player)
+        super.incScore(player)
       }
     } else {
       this.game.pointWonBy(player)
       if (this.game.isCompleted()) {
         this.game.reset()
-        super.pointWonBy(player)
+        super.incScore(player)
       }
     }
   }
