@@ -1,84 +1,132 @@
+
+import Players from "../src/Players"
 import TennisSet from "../src/TennisSet"
+import Game from "../src/Game"
+import SetTiebreaker from "../src/SetTiebreaker"
+import { PLAYER_1, PLAYER_2 } from "../src/TennisCommons"
 
-describe("Straight set win", () => {
+const PLAYER_1_NAME = "Player 1"
+const PLAYER_2_NAME = "Player 2"
+
+describe("Match score suite", () => {
   let set: TennisSet
   beforeAll(() => {
-    set = new TennisSet()
+    let players = new Players(PLAYER_1_NAME, PLAYER_2_NAME)
+    set = new TennisSet(players, new Game(), new SetTiebreaker())
   })
 
-  test("score should be 0-0 just before start of the set", () => {
-    expect(set.score()).toEqual("0-0")
-    expect(set.isCompleted()).toEqual(false)
+  test("Should show initial score at the start", () => {
+    expect(set.score()).toEqual("0-0, 0-0")
   })
 
-  test("score should increment by 1 on win", () => {
-    set.pointWonBy("1")
-    expect(set.score()).toEqual("1-0")
-    expect(set.isCompleted()).toEqual(false)
+  test("Should show score when Player1 won first point", () => {
+    set.pointWonBy(PLAYER_1)
+    expect(set.score()).toEqual("0-0, 15-0")
   })
 
-  test("score should increment by 2 on double win", () => {
-    set.pointWonBy("1")
-    set.pointWonBy("1")
-    expect(set.score()).toEqual("3-0")
-    expect(set.isCompleted()).toEqual(false)
+  test("Should show score when Player1 won second point", () => {
+    set.pointWonBy(PLAYER_1)
+    expect(set.score()).toEqual("0-0, 30-0")
   })
 
-  test("should win set after total of 6 game wins", () => {
-    set.pointWonBy("1")
-    set.pointWonBy("1")
-    set.pointWonBy("1")
-    expect(set.score()).toEqual("6-0")
-    expect(set.isCompleted()).toEqual(true)
-    expect(set.playerWinning()).toEqual("1")
+  test("Should show score when Player1 won third point", () => {
+    set.pointWonBy(PLAYER_1)
+    expect(set.score()).toEqual("0-0, 40-0")
+  })
+
+  test("should reflect game winning score ", () => {
+    set.pointWonBy(PLAYER_1)
+    expect(set.score()).toEqual("1-0, 0-0")
   })
 })
 
-describe("Just avoid tie breaker ", () => {
+describe("Game advantage", () => {
   let set: TennisSet
   beforeAll(() => {
-    set = new TennisSet()
+    let players = new Players(PLAYER_1_NAME, PLAYER_2_NAME)
+    set = new TennisSet(players, new Game(), new SetTiebreaker())
   })
 
-  test("after both winning 5 games", () => {
-    for (let i = 0; i < 5; i++) {
-      set.pointWonBy("1")
-      set.pointWonBy("2")
+  test("both players winning 3 games each", () => {
+    for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 4; i++) {
+        set.pointWonBy(PLAYER_1)
+      }
+      for (let i = 0; i < 4; i++) {
+        set.pointWonBy(PLAYER_2)
+      }
     }
-    expect(set.score()).toEqual("5-5")
-    expect(set.isCompleted()).toEqual(false)
-    expect(set.isTieBreaker()).toEqual(false)
+
+    expect(set.score()).toEqual("3-3, 0-0")
   })
 
-  test("two consecutive games move player one for win", () => {
-    set.pointWonBy("1")
-    set.pointWonBy("1")
-    expect(set.score()).toEqual("7-5")
-    expect(set.isCompleted()).toEqual(true)
-    expect(set.isTieBreaker()).toEqual(false)
+  test("Both players winging 3 point each", () => {
+    for (let i = 0; i < 3; i++) {
+      set.pointWonBy(PLAYER_1)
+      set.pointWonBy(PLAYER_2)
+    }
+
+    expect(set.score()).toEqual("3-3, Deuce")
+  })
+
+  test("Player 2 take the advantage ", () => {
+    set.pointWonBy(PLAYER_2)
+
+    expect(set.score()).toEqual("3-3, Advantage Player 2")
+  })
+
+  test("Player 1 push back to deuce ", () => {
+    set.pointWonBy(PLAYER_1)
+
+    expect(set.score()).toEqual("3-3, Deuce")
+  })
+
+  test("Player 1 push 2 more point to take the game", () => {
+    set.pointWonBy(PLAYER_1)
+    set.pointWonBy(PLAYER_1)
+
+    expect(set.score()).toEqual("4-3, 0-0")
   })
 })
 
-describe("Match pushed to a Tiebreaker ", () => {
+describe("Match set tiebreaker", () => {
   let set: TennisSet
   beforeAll(() => {
-    set = new TennisSet()
+    let players = new Players(PLAYER_1_NAME, PLAYER_2_NAME)
+    set = new TennisSet(players, new Game(), new SetTiebreaker())
   })
 
-  test("after both winning 6 games", () => {
+  test("both players winning 6 games each", () => {
     for (let i = 0; i < 6; i++) {
-      set.pointWonBy("1")
-      set.pointWonBy("2")
+      for (let i = 0; i < 4; i++) {
+        set.pointWonBy(PLAYER_1)
+      }
+      for (let i = 0; i < 4; i++) {
+        set.pointWonBy(PLAYER_2)
+      }
     }
-    expect(set.score()).toEqual("6-6")
-    expect(set.isCompleted()).toEqual(false)
-    expect(set.isTieBreaker()).toEqual(true)
+
+    expect(set.score()).toEqual("6-6, Tiebreaker 0-0")
   })
 
-  test("after tiebreaker need just one win to win the set", () => {
-    set.pointWonBy("2")
-    expect(set.score()).toEqual("6-7")
-    expect(set.isCompleted()).toEqual(true)
-    expect(set.isTieBreaker()).toEqual(false)
+  test("going close with game tie breaker", () => {
+    for (let i = 0; i < 5; i++) {
+      set.pointWonBy(PLAYER_1)
+      set.pointWonBy(PLAYER_2)
+    }
+
+    expect(set.score()).toEqual("6-6, Tiebreaker 5-5")
+  })
+
+  test("one point push to set point", () => {
+    set.pointWonBy(PLAYER_2)
+
+    expect(set.score()).toEqual("6-6, Tiebreaker 5-6")
+  })
+
+  test("another more point to win the set", () => {
+    set.pointWonBy(PLAYER_2)
+
+    expect(set.score()).toEqual("6-7, 0-0")
   })
 })
