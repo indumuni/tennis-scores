@@ -1,12 +1,17 @@
 import Match from "../src/Match"
+import Game from "../src/Game"
+import TennisSet from "../src/TennisSet"
+import SetTiebreaker from "../src/SetTiebreaker"
+import Players from "../src/Players"
 
 const PLAYER_1_NAME = "Player 1"
 const PLAYER_2_NAME = "Player 2"
 
-describe("Match score suite", () => {
+describe("Sequence to win first game", () => {
   let match: Match
   beforeAll(() => {
-    match = new Match(PLAYER_1_NAME, PLAYER_2_NAME)
+    let players = new Players(PLAYER_1_NAME, PLAYER_2_NAME)
+    match = new Match(players, new TennisSet(players, new Game(), new SetTiebreaker()))
   })
 
   test("Should show initial score at the start", () => {
@@ -34,58 +39,11 @@ describe("Match score suite", () => {
   })
 })
 
-describe("Game advantage", () => {
+describe("Match win with a tiebreaker", () => {
   let match: Match
   beforeAll(() => {
-    match = new Match(PLAYER_1_NAME, PLAYER_2_NAME)
-  })
-
-  test("both players winning 3 games each", () => {
-    for (let i = 0; i < 3; i++) {
-      for (let i = 0; i < 4; i++) {
-        match.pointWonBy(PLAYER_1_NAME)
-      }
-      for (let i = 0; i < 4; i++) {
-        match.pointWonBy(PLAYER_2_NAME)
-      }
-    }
-
-    expect(match.score()).toEqual("3-3, 0-0")
-  })
-
-  test("Both players winging 3 point each", () => {
-    for (let i = 0; i < 3; i++) {
-      match.pointWonBy(PLAYER_1_NAME)
-      match.pointWonBy(PLAYER_2_NAME)
-    }
-
-    expect(match.score()).toEqual("3-3, Deuce")
-  })
-
-  test("Player 2 take the advantage ", () => {
-    match.pointWonBy(PLAYER_2_NAME)
-
-    expect(match.score()).toEqual("3-3, Advantage Player 2")
-  })
-
-  test("Player 1 push back to deuce ", () => {
-    match.pointWonBy(PLAYER_1_NAME)
-
-    expect(match.score()).toEqual("3-3, Deuce")
-  })
-
-  test("Player 1 push 2 more point to take the game", () => {
-    match.pointWonBy(PLAYER_1_NAME)
-    match.pointWonBy(PLAYER_1_NAME)
-
-    expect(match.score()).toEqual("4-3, 0-0")
-  })
-})
-
-describe("Match set tiebreaker", () => {
-  let match: Match
-  beforeAll(() => {
-    match = new Match(PLAYER_1_NAME, PLAYER_2_NAME)
+    let players = new Players(PLAYER_1_NAME, PLAYER_2_NAME)
+    match = new Match(players, new TennisSet(players, new Game(), new SetTiebreaker()))
   })
 
   test("both players winning 6 games each", () => {

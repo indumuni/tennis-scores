@@ -13,7 +13,7 @@ abstract class Scorable {
     return `${this.displayScore(PLAYER_1)}-${this.displayScore(PLAYER_2)}`
   }
 
-  public pointWonBy(player: PLAYER) {
+  public incScore(player: PLAYER) {
     let score = this.getScore(player)
     this.setScore(player, ++score)
   }

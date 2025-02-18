@@ -1,8 +1,52 @@
 import Scorable from "./Scorable"
+import Game from "./Game"
+import SetTiebreaker from "./SetTiebreaker"
+import { PLAYER} from "./TennisCommons"
+import Players from "./Players"
 
 class TennisSet extends Scorable {
-  constructor() {
+  private players: Players
+  private game: Game
+  private setTiebreaker: SetTiebreaker
+
+  constructor(players: Players, game: Game, setTiebreaker: SetTiebreaker) {
     super()
+    this.players = players
+    this.game = game
+    this.setTiebreaker = setTiebreaker
+  }
+
+  public score() {
+    if (this.game.isAdvantage()) {
+      const playerId = this.game.playerWinning()
+      let playerName
+      if (playerId) {
+        playerName = this.players.findPlayerName(playerId)
+      }
+
+      return `${super.score()}, ${this.game.score()} ${playerName}`
+    }
+
+    if (this.isTieBreaker()) {
+      return `${super.score()}, Tiebreaker ${this.setTiebreaker.score()}`
+    }
+    return `${super.score()}, ${this.game.score()}`
+  }
+
+  pointWonBy(player: PLAYER) {
+    if (this.isTieBreaker()) {
+      this.setTiebreaker.incScore(player)
+      if (this.setTiebreaker.isCompleted()) {
+        this.setTiebreaker.reset()
+        super.incScore(player)
+      }
+    } else {
+      this.game.pointWonBy(player)
+      if (this.game.isCompleted()) {
+        this.game.reset()
+        super.incScore(player)
+      }
+    }
   }
 
   isCompleted(): boolean {
