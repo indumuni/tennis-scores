@@ -12,11 +12,6 @@ The **Game** class contains rules for deuce, advantage, and completed states. Th
 
 The **Match** class provides instructions on how to use these classes to navigate the correct scoring behavior.
 
-### Note:
-
-Ideally, TennisSet should depend on Game and Tiebreaker and implement logic. Not pushing the re-factor at this stage because of the time constrains.
-One of the main reason Game need to know the Player name to format score. Passing Name to Game is not something I want to compromise.
-
 Rules : https://en.wikipedia.org/wiki/Tennis_scoring_system
 
 How to run test
