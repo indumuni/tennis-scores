@@ -8,19 +8,20 @@ const otherPlayer = (player: PLAYER): PLAYER => {
 
 class Player {
   private readonly playersName: Map<PLAYER, string> = new Map()
+
   constructor(player1: string, player2: string) {
     this.playersName.set(PLAYER_1, player1)
     this.playersName.set(PLAYER_2, player2)
   }
 
-   findPlayerName(playerId: PLAYER) {
+  findPlayerName(playerId: PLAYER) {
     const player = this.playersName.get(playerId)
 
     if (player === undefined) throw new Error("Player not found")
     return player
   }
 
-   findPlayerByName(playerName: string): PLAYER {
+  findPlayerByName(playerName: string): PLAYER {
     for (const [playerId, name] of this.playersName.entries()) {
       if (playerName === name) {
         return playerId
@@ -31,8 +32,4 @@ class Player {
   }
 }
 
-export default Player
-export { otherPlayer }
-export { PLAYER_2 }
-export { PLAYER_1 }
-export { PLAYER }
+export { Player, otherPlayer, PLAYER_2, PLAYER_1, PLAYER }
