@@ -1,5 +1,4 @@
-import Players from "../src/Players"
-import { PLAYER_1 } from "../src/TennisCommons"
+import Players, { PLAYER_1 } from "../src/Players"
 
 const PLAYER_1_NAME = "Player 1"
 const PLAYER_2_NAME = "Player 2"

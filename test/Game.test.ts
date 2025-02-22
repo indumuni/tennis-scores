@@ -1,5 +1,5 @@
 import Game from "../src/Game"
-import { PLAYER_1, PLAYER_2 } from "../src/TennisCommons"
+import { PLAYER_1, PLAYER_2 } from "../src/Players"
 
 describe("Straight game win", () => {
   let game: Game

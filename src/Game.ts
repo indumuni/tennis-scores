@@ -1,5 +1,6 @@
-import { PLAYER, PLAYER_1, PLAYER_2, otherPlayer } from "./TennisCommons"
+
 import Scorable from "./Scorable"
+import { otherPlayer, PLAYER, PLAYER_1, PLAYER_2 } from "./Players"
 
 class Game extends Scorable {
   constructor() {

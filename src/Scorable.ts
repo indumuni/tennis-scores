@@ -1,4 +1,5 @@
-import { PLAYER, PLAYER_1, PLAYER_2 } from "./TennisCommons"
+
+import { PLAYER, PLAYER_1, PLAYER_2 } from "./Players"
 
 abstract class Scorable {
   private gamePoints: Map<PLAYER, number> = new Map()

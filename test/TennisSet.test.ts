@@ -1,9 +1,8 @@
 
-import Players from "../src/Players"
+import Players, { PLAYER_1, PLAYER_2 } from "../src/Players"
 import TennisSet from "../src/TennisSet"
 import Game from "../src/Game"
 import SetTiebreaker from "../src/SetTiebreaker"
-import { PLAYER_1, PLAYER_2 } from "../src/TennisCommons"
 
 const PLAYER_1_NAME = "Player 1"
 const PLAYER_2_NAME = "Player 2"

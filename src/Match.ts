@@ -1,6 +1,6 @@
-import { PLAYER } from "./TennisCommons"
+
 import TennisSet from "./TennisSet"
-import Players from "./Players"
+import Players, { PLAYER } from "./Players"
 
 class Match {
   private set: TennisSet

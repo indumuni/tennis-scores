@@ -1,8 +1,7 @@
 import Scorable from "./Scorable"
 import Game from "./Game"
 import SetTiebreaker from "./SetTiebreaker"
-import { PLAYER} from "./TennisCommons"
-import Players from "./Players"
+import Players, { PLAYER } from "./Players"
 
 class TennisSet extends Scorable {
   private players: Players
