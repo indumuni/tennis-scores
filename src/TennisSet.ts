@@ -1,16 +1,16 @@
 import Scorable from "./Scorable"
 import Game from "./Game"
 import SetTiebreaker from "./SetTiebreaker"
-import { Player, PLAYER } from "./Players"
+import Players, { PLAYER } from "./Players"
 
 class TennisSet extends Scorable {
-  private player: Player
+  private players: Players
   private game: Game
   private setTiebreaker: SetTiebreaker
 
-  constructor(players: Player, game: Game, setTiebreaker: SetTiebreaker) {
+  constructor(players: Players, game: Game, setTiebreaker: SetTiebreaker) {
     super()
-    this.player = players
+    this.players = players
     this.game = game
     this.setTiebreaker = setTiebreaker
   }
@@ -20,7 +20,7 @@ class TennisSet extends Scorable {
       const playerId = this.game.playerWinning()
       let playerName
       if (playerId) {
-        playerName = this.player.findPlayerName(playerId)
+        playerName = this.players.findPlayerName(playerId)
       }
 
       return `${super.score()}, ${this.game.score()} ${playerName}`

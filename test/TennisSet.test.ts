@@ -1,5 +1,5 @@
 
-import { Player, PLAYER_1, PLAYER_2 } from "../src/Players"
+import Players, { PLAYER_1, PLAYER_2 } from "../src/Players"
 import TennisSet from "../src/TennisSet"
 import Game from "../src/Game"
 import SetTiebreaker from "../src/SetTiebreaker"
@@ -10,8 +10,8 @@ const PLAYER_2_NAME = "Player 2"
 describe("Match score suite", () => {
   let set: TennisSet
   beforeAll(() => {
-    const player = new Player(PLAYER_1_NAME, PLAYER_2_NAME)
-    set = new TennisSet(player, new Game(), new SetTiebreaker())
+    let players = new Players(PLAYER_1_NAME, PLAYER_2_NAME)
+    set = new TennisSet(players, new Game(), new SetTiebreaker())
   })
 
   test("Should show initial score at the start", () => {
@@ -42,8 +42,8 @@ describe("Match score suite", () => {
 describe("Game advantage", () => {
   let set: TennisSet
   beforeAll(() => {
-    const player = new Player(PLAYER_1_NAME, PLAYER_2_NAME)
-    set = new TennisSet(player, new Game(), new SetTiebreaker())
+    let players = new Players(PLAYER_1_NAME, PLAYER_2_NAME)
+    set = new TennisSet(players, new Game(), new SetTiebreaker())
   })
 
   test("both players winning 3 games each", () => {
@@ -91,8 +91,8 @@ describe("Game advantage", () => {
 describe("Match set tiebreaker", () => {
   let set: TennisSet
   beforeAll(() => {
-    const player = new Player(PLAYER_1_NAME, PLAYER_2_NAME)
-    set = new TennisSet(player, new Game(), new SetTiebreaker())
+    let players = new Players(PLAYER_1_NAME, PLAYER_2_NAME)
+    set = new TennisSet(players, new Game(), new SetTiebreaker())
   })
 
   test("both players winning 6 games each", () => {

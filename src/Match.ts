@@ -1,11 +1,12 @@
+
 import TennisSet from "./TennisSet"
-import { Player, PLAYER } from "./Players"
+import Players, { PLAYER } from "./Players"
 
 class Match {
   private set: TennisSet
-  private players: Player
+  private players: Players
 
-  constructor(players: Player, tennisSet: TennisSet) {
+  constructor(players: Players, tennisSet: TennisSet, ) {
     this.players = players
     this.set = tennisSet
   }
