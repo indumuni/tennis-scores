@@ -1,9 +1,6 @@
 import Scorable from "./Scorable"
 
 class SetTiebreaker extends Scorable {
-  constructor() {
-    super()
-  }
 
   isCompleted(): boolean {
     const { player1Score, player2Score } = this.getPlayerScores()
