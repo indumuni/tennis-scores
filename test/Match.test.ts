@@ -2,7 +2,7 @@ import Match from "../src/Match"
 import Game from "../src/Game"
 import TennisSet from "../src/TennisSet"
 import SetTiebreaker from "../src/SetTiebreaker"
-import Players from "../src/Players"
+import { Player } from "../src/Players"
 
 const PLAYER_1_NAME = "Player 1"
 const PLAYER_2_NAME = "Player 2"
@@ -10,8 +10,8 @@ const PLAYER_2_NAME = "Player 2"
 describe("Sequence to win first game", () => {
   let match: Match
   beforeAll(() => {
-    let players = new Players(PLAYER_1_NAME, PLAYER_2_NAME)
-    match = new Match(players, new TennisSet(players, new Game(), new SetTiebreaker()))
+    const player = new Player(PLAYER_1_NAME, PLAYER_2_NAME)
+    match = new Match(player, new TennisSet(player, new Game(), new SetTiebreaker()))
   })
 
   test("Should show initial score at the start", () => {
@@ -42,8 +42,8 @@ describe("Sequence to win first game", () => {
 describe("Match win with a tiebreaker", () => {
   let match: Match
   beforeAll(() => {
-    let players = new Players(PLAYER_1_NAME, PLAYER_2_NAME)
-    match = new Match(players, new TennisSet(players, new Game(), new SetTiebreaker()))
+    const player = new Player(PLAYER_1_NAME, PLAYER_2_NAME)
+    match = new Match(player, new TennisSet(player, new Game(), new SetTiebreaker()))
   })
 
   test("both players winning 6 games each", () => {
