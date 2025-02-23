@@ -3,9 +3,6 @@ import Scorable from "./Scorable"
 import { otherPlayer, PLAYER, PLAYER_1, PLAYER_2 } from "./Players"
 
 class Game extends Scorable {
-  constructor() {
-    super()
-  }
 
   score() {
     if (this.isDeuce()) {
