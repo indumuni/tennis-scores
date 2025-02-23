@@ -15,7 +15,7 @@ class TennisSet extends Scorable {
     this.setTiebreaker = setTiebreaker
   }
 
-  public score() {
+  score() {
     if (this.game.isAdvantage()) {
       const playerId = this.game.playerWinning()
       let playerName
